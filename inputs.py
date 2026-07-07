@@ -12,33 +12,12 @@ from bot_core import _SHUTDOWN_FLAG  # noqa: F401
 from bot_ui import *  # noqa: F401,F403
 
 
-@bot.message_handler(content_types=['text', 'photo', 'document'])
+@bot.message_handler(
+    content_types=['text', 'photo', 'document'],
+    func=lambda m: not (m.text and m.text.startswith('/'))
+)
 def handle_message(message):
-    from bot_lang import get_text
-    user_id = message.from_user.id
-    chat_id = message.chat.id
-
-    # ========== СУПЕР-ОТЛАДКА ==========
-
-    print(f"\n🔥🔥🔥 ПОЛУЧЕНО СООБЩЕНИЕ от {user_id}: '{message.text}'")
-
-    # Принудительно инициализируем пользователя, если нужно
-
-    if user_id not in users:
-        init_user(user_id)
-
-    # Проверим статус воркера
-    is_worker = is_team_worker(user_id)
-    is_admin = is_admin_any_team(user_id)
-    print(f"📊 Статус: is_worker={is_worker}, is_admin={is_admin}")
-
-    # Распечатаем все флаги пользователя
-
-    if user_id in users:
-        user_flags = {k: v for k, v in users[user_id].items() if k.startswith('awaiting_')}
-        print(f"🚩 Флаги пользователя: {user_flags}")
-    print("=" * 50)
-
+    ...
     # ========== КОНЕЦ ОТЛАДКИ ==========
 
     # ===== АВТОМАТИЧЕСКИЙ СБРОС КОНФЛИКТУЮЩИХ ФЛАГОВ =====
