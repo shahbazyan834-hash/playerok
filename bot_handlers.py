@@ -26,8 +26,9 @@ from bot_ui import *  # клавиатуры и UI-форматтеры
 
 # Регистрируем все handler'ы через импорт пакета. Порядок важен —
 # catch-all callbacks и text_handler должны быть в КОНЦЕ пакета __init__.py
-import handlers  # noqa: F401
-
+import bot_ui        # noqa: F401
+import callbacks      # noqa: F401
+import inputs         # noqa: F401
 
 if __name__ == "__main__":
     logger.info("Playerok OTC bot starting (version %s)", BOT_VERSION)
