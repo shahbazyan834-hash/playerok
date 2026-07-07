@@ -79,5 +79,3 @@ Werkzeug==3.1.8
 yarl==1.24.2
 pyTelegramBotAPI
 python-dotenv
-init_user,
-    update_user_activity
